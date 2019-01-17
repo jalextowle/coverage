@@ -1,0 +1,23 @@
+{
+  "name": "coverage",
+  "version": "1.0.0",
+  "description": "This project is under active development, and as such is in a pre-alpha state. This tool should not be used in production until this disclaimer is removed.",
+  "main": "hasher.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalextowle/coverage.git"
+  },
+  "author": "Alex",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jalextowle/coverage/issues"
+  },
+  "homepage": "https://github.com/jalextowle/coverage#readme",
+  "dependencies": {
+    "ethers": "^4.0.21",
+    "web3": "^1.0.0-beta.37"
+  }
+}
