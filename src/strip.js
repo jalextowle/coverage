@@ -19,7 +19,8 @@ function getBytecode(path, files, callback) {
         arr.push({
           name: json.contractName,
           bytecode: json.bytecode,
-          deployed: json.deployedBytecode
+          deployed: json.deployedBytecode, 
+          pc_set: new Set([])
         })
         closure(idx + 1)
       })
