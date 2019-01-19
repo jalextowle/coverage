@@ -4,7 +4,7 @@
   "description": "This project is under active development, and as such is in a pre-alpha state. This tool should not be used in production until this disclaimer is removed.",
   "main": "hasher.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,8 @@
   "dependencies": {
     "ethers": "^4.0.21",
     "web3": "^1.0.0-beta.37"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
   }
 }
