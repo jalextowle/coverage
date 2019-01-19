@@ -1,4 +1,5 @@
 const fs = require('fs')
+const getPCs = require('../lib/pc.js')
 
 // TODO - There should probably be more error handling logic
 // Build is the path to the build/contracts folder to strip
@@ -16,11 +17,12 @@ function getBytecode(path, files, callback) {
       fs.readFile(path + files[idx], (error, content) => {
         if (error) callback(error)
         let json = JSON.parse(content) 
+        console.log(getPCs(json.bytecode))
         arr.push({
           name: json.contractName,
           bytecode: json.bytecode,
-          deployed: json.deployedBytecode, 
-          pc_set: new Set([])
+          ideal_pcs: getPCs(json.bytecode),
+          test_pcs: new Set([])
         })
         closure(idx + 1)
       })
