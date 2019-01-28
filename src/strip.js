@@ -14,18 +14,22 @@ function getBytecode(path, files, callback) {
   let arr = []
   let closure = (idx) => {
     if (idx != files.length) {
-      fs.readFile(path + files[idx], (error, content) => {
-        if (error) callback(error)
-        let json = JSON.parse(content) 
-        console.log(getPCs(json.bytecode))
-        arr.push({
-          name: json.contractName,
-          bytecode: json.bytecode,
-          ideal_pcs: getPCs(json.bytecode),
-          test_pcs: new Set([])
+      if (files[idx] !== 'Migrations.json') {
+        fs.readFile(path + files[idx], (error, content) => {
+          if (error) callback(error)
+          let json = JSON.parse(content) 
+          console.log(getPCs(json.bytecode))
+          arr.push({
+            name: json.contractName,
+            bytecode: json.bytecode,
+            ideal_pcs: getPCs(json.bytecode),
+            test_pcs: new Set([])
+          })
+          closure(idx + 1)
         })
+      } else {
         closure(idx + 1)
-      })
+      }
     } else {
       callback(null, arr)
     }

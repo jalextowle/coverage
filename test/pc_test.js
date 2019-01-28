@@ -1,7 +1,10 @@
 const getPCs = require('../lib/pc.js')
+const analyzer = require('../src/pc.js')
 require('chai')
     .use(require('chai-as-promised'))
     .should()
+
+describe('#Analyzer', 
 
 describe('#PC', () => {
   context('should correctly parse bytecode that doesn\'t have any push instructions', () => {
