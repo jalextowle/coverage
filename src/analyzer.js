@@ -31,5 +31,6 @@ module.exports = (logs, info, callback) => {
         /* TODO: This is the constructor case */
       }
     }
+    callback(null, tracker)
   })
 }
