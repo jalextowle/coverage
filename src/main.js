@@ -2,7 +2,7 @@ const strip = require('./strip.js')
 const analyzer = require('./analyzer.js')
 
 if (process.argv.length != 4) {
-  console.log(`Error: Expected 4 arguments but received ${process.argv.length}`) 
+  console.log(`Usage: node main.js BUILD_PATH LOG_PATH`) 
   process.exit()
 }
 

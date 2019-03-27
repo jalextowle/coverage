@@ -11,7 +11,7 @@ module.exports = (build, callback) => {
 }
 
 function getBytecode(path, files, callback) {
-  let arr = []
+  let arr = [];
   ((idx) => {
     if (idx != files.length) {
       if (files[idx] !== 'Migrations.json') {

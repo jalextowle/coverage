@@ -1,0 +1,12 @@
+#!/bin/bash
+LOG_PATH=../log
+
+# Run the truffle test suite and output the debugging logged output 
+node ../ganache-cli/cli.js --debug | grep "\(pc:*\|bytecode:*\)" > $LOG_PATH &
+truffle test --network development
+
+# Kill the testrpc process running in the background now that the tests have finished running
+kill %1
+
+# Analyze the log output against the build paths contract's
+node ../src/main.js $1 $LOG_PATH
