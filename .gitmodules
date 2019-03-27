@@ -1,0 +1,6 @@
+[submodule "ganache-core"]
+	path = ganache-core
+	url = https://github.com/jalextowle/ganache-core
+[submodule "ganache-cli"]
+	path = ganache-cli
+	url = https://github.com/trufflesuite/ganache-cli

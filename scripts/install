@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Install the ganache-cli project
+cd ./ganache-cli/
+npm install
+npm run build 
+
+# Install the ganache-core project
+cd ../ganache-core/
+npm install
+npm run build
+npm run build-web 
+
+# Replace the ganache-core dependency in the ganache-cli submodule with the ganache-core version that 
+# is stored as a submodule in this repository.
+cd ../ganache-cli/
+rm -rf ./node_modules/ganache-core/*
+cp -r ../ganache-core/ ./node_modules/ganache-core/
