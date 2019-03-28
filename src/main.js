@@ -10,7 +10,7 @@ strip(process.argv[2], (error, info) => {
   if (error) {
     console.log(error)
   } else {
-    analyzer(process.argv[3], info, (error, tracker) => { 
+    analyzer(process.argv[3], info, (error) => { 
       if (error) {
         console.log(error)
       } else {

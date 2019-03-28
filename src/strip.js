@@ -1,5 +1,5 @@
 const fs = require('fs')
-const getPCs = require('../lib/pc.js')
+const getPCs = require('./pc.js')
 
 // TODO - There should probably be more error handling logic
 // Build is the path to the build/contracts folder to strip
