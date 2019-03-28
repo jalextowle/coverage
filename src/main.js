@@ -7,5 +7,18 @@ if (process.argv.length != 4) {
 }
 
 strip(process.argv[2], (error, info) => {
-  analyzer(process.argv[3], info, (error, something) => { })
+  if (error) {
+    console.log(error)
+  } else {
+    analyzer(process.argv[3], info, (error, tracker) => { 
+      if (error) {
+        console.log(error)
+      } else {
+        for (let i = 0; i < info.length; i++) {
+          let coverage = (info[i].test_pcs.size / info[i].ideal_pcs.length) * 100
+          console.log(`Code coverage of ${info[i].name}: ${coverage}%`)   
+        }
+      }
+    })
+  }
 })

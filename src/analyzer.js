@@ -1,13 +1,14 @@
 const fs = require('fs')
-const bytecode_reg = /bytecode: */
 
-// Logs is the path to the logs that will be analyzed
-// Info is the data from the build/contracts folder
+// @param logs - The path to the logs that will be analyzed
+// @param info - The data from the build/contracts folder
 module.exports = (logs, info, callback) => {
   fs.readFile(logs, (error, contents) => {
     if (error) callback(error)
-    let arr = contents.toString('utf8').split('\n')
     let tracker = {} 
+    let arr = contents.toString('utf8').split('\n')
+    // The last element of the array will be an empty string, and this should be discarded 
+    arr = arr.slice(0, arr.length - 1)
     // Set arr to be all of the lines after line 362. The reason
     // why this is necessary is because pre-compile contracts are 
     // deployed every time ganache-cli is run. It is simply faster
@@ -15,15 +16,16 @@ module.exports = (logs, info, callback) => {
     arr = arr.slice(362, arr.length)
     for (let i = 0; i < arr.length; i += 2) {
       let bytecode = arr[i].slice(10, arr[i].length)
+      let elem = arr[i + 1]
       let pc = Number(elem.slice(4, elem.length))
-      if (tracker[bytecode]) {
-        tracker[bytecode].test_pcs.add(pc)
+      if (tracker[bytecode] !== undefined) {
+        info[tracker[bytecode]].test_pcs.add(pc)
       } else if (bytecode !== "") {
         let contract
         for (let j = 0; j < info.length; j++) {
-          if (bytecode === info[j].bytecode) {
+          if (bytecode === info[j].bytecode.slice(2, info[j].bytecode.length)) {
+            tracker[bytecode] = j
             info[j].test_pcs.add(pc)
-            tracker[bytecode] = info[j]
             break
           }
         }

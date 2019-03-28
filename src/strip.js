@@ -6,32 +6,33 @@ const getPCs = require('../lib/pc.js')
 module.exports = (build, callback) => {
   fs.readdir(build, (error, items) => {
     if (error) callback(error)
-    getBytecode(build, items, callback)
+    getInfoFromFiles(build, items, callback)
   })
 }
 
-function getBytecode(path, files, callback) {
+function getInfoFromFiles(path, files, callback) {
+  console.log(path)
   let arr = [];
-  ((idx) => {
+  let getInfoFromIdx = (idx) => {
     if (idx != files.length) {
       if (files[idx] !== 'Migrations.json') {
         fs.readFile(path + files[idx], (error, content) => {
           if (error) callback(error)
           let json = JSON.parse(content) 
-          console.log(getPCs(json.bytecode))
           arr.push({
             name: json.contractName,
-            bytecode: json.bytecode,
-            ideal_pcs: getPCs(json.bytecode),
+            bytecode: json.deployedBytecode,
+            ideal_pcs: getPCs(json.deployedBytecode),
             test_pcs: new Set([])
           })
-          closure(idx + 1)
+          getInfoFromIdx(idx + 1)
         })
       } else {
-        closure(idx + 1)
+        getInfoFromIdx(idx + 1)
       }
     } else {
       callback(null, arr)
     }
-  })(0)
+  }
+  getInfoFromIdx(0)
 }
