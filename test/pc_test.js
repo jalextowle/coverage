@@ -1,8 +1,5 @@
-const getProgramCounters = require('../lib/pc.js')
-
-require('chai')
-    .use(require('chai-as-promised'))
-    .should()
+require('./support/chai.js')
+const getProgramCounters = require('../src/pc.js')
 
 describe('#PC', () => {
   context('should correctly parse bytecode that doesn\'t have any push instructions', () => {
